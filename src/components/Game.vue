@@ -1,7 +1,13 @@
-<script setup>
+<script>
 import { Engine } from "@/js/Engine.js";
 
-const engine = new Engine();
+export default {
+  mounted() {
+    console.log("mounted");
+    const engine = new Engine();
+    engine.init();
+  },
+};
 </script>
 
 <template>
