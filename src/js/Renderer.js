@@ -35,40 +35,53 @@ export class Renderer {
       this.app.renderer.plugins.interaction.mouse.global.y
     );
 
-    this.text.text = `Mouse: ${this.mouse.x}, ${this.mouse.y}`;
+    const numBodies = this.matterEngine.world.bodies.length;
+    this.text.text = `Mouse: ${this.mouse.x}, ${this.mouse.y} - Bodies: ${numBodies}`;
 
+    const bodyMap = {};
     for (let body of this.matterEngine.world.bodies) {
-      var sprite = this.app.stage.children.find((x) => x.id == body.id);
-      if (!sprite) {
+      let graphics = this.app.stage.children.find((x) => x.id == body.id);
+      if (!graphics) {
         if (!body.shape) break;
+        graphics = new PIXI.Graphics();
+
         switch (body.shape) {
           case "rectangle":
-            sprite = new PIXI.Graphics();
-            sprite.id = body.id;
-            sprite.color = body.color;
-            sprite.beginFill(body.color);
-            sprite.drawRect(0, 0, body.width, body.height);
-            sprite.endFill();
-            sprite.position = body.position;
-            sprite.pivot = { x: body.width / 2, y: body.height / 2 };
-            this.app.stage.addChild(sprite);
+            graphics.id = body.id;
+            graphics.color = body.color;
+            graphics.beginFill(body.color);
+            graphics.drawRect(0, 0, body.width, body.height);
+            graphics.endFill();
+            graphics.position = body.position;
+            graphics.rotation = body.angle;
+            graphics.pivot = { x: body.width / 2, y: body.height / 2 };
             break;
           case "circle":
-            sprite = new PIXI.Graphics();
-            sprite.id = body.id;
-            sprite.color = body.color;
-            sprite.beginFill(body.color);
-            sprite.drawCircle(0, 0, body.radius);
-            sprite.endFill();
-            sprite.position = body.position;
-            sprite.pivot = { x: 0, y: 0 };
-            this.app.stage.addChild(sprite);
+            graphics.id = body.id;
+            graphics.color = body.color;
+            graphics.beginFill(body.color);
+            graphics.drawCircle(0, 0, body.radius);
+            graphics.endFill();
+            graphics.position = body.position;
+            graphics.rotation = body.angle;
+            graphics.pivot = { x: 0, y: 0 };
             break;
         }
+
+        graphics.fromMatterJs = true;
+        this.app.stage.addChild(graphics);
+        bodyMap[body.id] = true;
       } else {
-        sprite.x = body.position.x;
-        sprite.y = body.position.y;
-        sprite.rotation = body.angle;
+        graphics.x = body.position.x;
+        graphics.y = body.position.y;
+        graphics.rotation = body.angle;
+        bodyMap[body.id] = true;
+      }
+    }
+
+    for (let child of this.app.stage.children) {
+      if (child.fromMatterJs && !bodyMap[child.id]) {
+        this.app.stage.removeChild(child);
       }
     }
 

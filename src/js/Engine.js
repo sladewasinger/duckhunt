@@ -22,8 +22,6 @@ export class Engine {
   }
 
   init() {
-    this.circle = ShapeFactory.createCircle(249, 0, 50);
-    this.box = ShapeFactory.createRectangle(200, 50, 100, 100);
     this.ground = ShapeFactory.createRectangle(
       this.renderer.width / 2,
       this.renderer.height - 25,
@@ -36,7 +34,7 @@ export class Engine {
       }
     );
 
-    Matter.World.add(this.engine.world, [this.box, this.ground, this.circle]);
+    Matter.World.add(this.engine.world, [this.ground]);
 
     this.update();
   }
