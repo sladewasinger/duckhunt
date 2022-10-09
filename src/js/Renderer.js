@@ -1,5 +1,6 @@
 import * as PIXI from "pixi.js";
 import { Mouse } from "./Mouse";
+import { Camera } from "./Camera";
 
 export class Renderer {
   constructor(canvas, matterEngine, width, height) {
@@ -16,6 +17,8 @@ export class Renderer {
       antialias: true,
       resolution: 1,
     });
+    this.camera = new Camera(width, height);
+    this.app.stage.addChild(this.camera.container);
 
     const text = new PIXI.Text(`Mouse: ${this.mouse.x}, ${this.mouse.y}`, {
       fontFamily: "Arial",
@@ -25,7 +28,7 @@ export class Renderer {
     });
     text.x = 10;
     text.y = 10;
-    this.app.stage.addChild(text);
+    this.camera.container.addChild(text);
     this.text = text;
   }
 
@@ -40,7 +43,9 @@ export class Renderer {
 
     const bodyMap = {};
     for (let body of this.matterEngine.world.bodies) {
-      let graphics = this.app.stage.children.find((x) => x.id == body.id);
+      let graphics = this.camera.container.children.find(
+        (x) => x.id == body.id
+      );
       if (!graphics) {
         if (!body.shape) break;
         graphics = new PIXI.Graphics();
@@ -69,7 +74,7 @@ export class Renderer {
         }
 
         graphics.fromMatterJs = true;
-        this.app.stage.addChild(graphics);
+        this.camera.container.addChild(graphics);
         bodyMap[body.id] = true;
       } else {
         graphics.x = body.position.x;
@@ -79,9 +84,9 @@ export class Renderer {
       }
     }
 
-    for (let child of this.app.stage.children) {
+    for (let child of this.camera.container.children) {
       if (child.fromMatterJs && !bodyMap[child.id]) {
-        this.app.stage.removeChild(child);
+        this.camera.container.removeChild(child);
       }
     }
 
