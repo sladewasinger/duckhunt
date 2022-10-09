@@ -11,12 +11,12 @@ export class Camera {
     this.container.height = height;
     this.container.position = { x: 0, y: 0 };
 
-    // const mask = new PIXI.Graphics();
-    // mask.beginFill(0x000000);
-    // mask.drawRect(0, 0, width, height);
-    // mask.endFill();
-    // this.container.mask = mask;
-    // this.mask = mask;
+    const mask = new PIXI.Graphics();
+    mask.beginFill(0x000000);
+    mask.drawRect(0, 0, width, height);
+    mask.endFill();
+    this.container.mask = mask;
+    this.mask = mask;
   }
 
   setPosition(x, y) {

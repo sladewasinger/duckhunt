@@ -22,6 +22,8 @@ export class Engine {
   }
 
   init() {
+    this.lastUpdatedTime = Date.now();
+
     this.ground = ShapeFactory.createRectangle(
       this.renderer.width / 2,
       this.renderer.height - 25,
@@ -46,9 +48,11 @@ export class Engine {
       }
     }
 
-    Matter.Engine.update(this.engine);
+    const elapsed = Date.now() - this.lastUpdatedTime;
+    this.lastUpdatedTime = Date.now();
+    Matter.Engine.update(this.engine, elapsed);
     this.renderer.update();
 
-    setTimeout(() => this.update(), 1000 / 60);
+    window.requestAnimationFrame(() => this.update());
   }
 }
