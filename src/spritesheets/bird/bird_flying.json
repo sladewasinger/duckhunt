@@ -1,0 +1,143 @@
+{
+  "frames": {
+    "BirdSprite-0.png": {
+      "frame": { "x": 0, "y": 0, "w": 16, "h": 16 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 16 },
+      "sourceSize": { "w": 16, "h": 16 },
+      "anchor": { "x": 0, "y": 0 }
+    },
+    "BirdSprite-1.png": {
+      "frame": { "x": 16, "y": 0, "w": 16, "h": 16 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 16 },
+      "sourceSize": { "w": 16, "h": 16 },
+      "anchor": { "x": 0, "y": 0 }
+    },
+    "BirdSprite-2.png": {
+      "frame": { "x": 32, "y": 0, "w": 16, "h": 16 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 16 },
+      "sourceSize": { "w": 16, "h": 16 },
+      "anchor": { "x": 0, "y": 0 }
+    },
+    "BirdSprite-3.png": {
+      "frame": { "x": 48, "y": 0, "w": 16, "h": 16 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 16 },
+      "sourceSize": { "w": 16, "h": 16 },
+      "anchor": { "x": 0, "y": 0 }
+    },
+    "BirdSprite-4.png": {
+      "frame": { "x": 64, "y": 0, "w": 16, "h": 16 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 16 },
+      "sourceSize": { "w": 16, "h": 16 },
+      "anchor": { "x": 0, "y": 0 }
+    },
+    "BirdSprite-5.png": {
+      "frame": { "x": 80, "y": 0, "w": 16, "h": 16 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 16 },
+      "sourceSize": { "w": 16, "h": 16 },
+      "anchor": { "x": 0, "y": 0 }
+    },
+    "BirdSprite-6.png": {
+      "frame": { "x": 96, "y": 0, "w": 16, "h": 16 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 16 },
+      "sourceSize": { "w": 16, "h": 16 },
+      "anchor": { "x": 0, "y": 0 }
+    },
+    "BirdSprite-7.png": {
+      "frame": { "x": 112, "y": 0, "w": 16, "h": 16 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 16 },
+      "sourceSize": { "w": 16, "h": 16 },
+      "anchor": { "x": 0, "y": 0 }
+    },
+    "BirdSprite-8.png": {
+      "frame": { "x": 128, "y": 0, "w": 16, "h": 16 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 16 },
+      "sourceSize": { "w": 16, "h": 16 },
+      "anchor": { "x": 0, "y": 0 }
+    },
+    "BirdSprite-9.png": {
+      "frame": { "x": 144, "y": 0, "w": 16, "h": 16 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 16 },
+      "sourceSize": { "w": 16, "h": 16 },
+      "anchor": { "x": 0, "y": 0 }
+    },
+    "BirdSprite-10.png": {
+      "frame": { "x": 160, "y": 0, "w": 16, "h": 16 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 16 },
+      "sourceSize": { "w": 16, "h": 16 },
+      "anchor": { "x": 0, "y": 0 }
+    },
+    "BirdSprite-11.png": {
+      "frame": { "x": 176, "y": 0, "w": 16, "h": 16 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 16 },
+      "sourceSize": { "w": 16, "h": 16 },
+      "anchor": { "x": 0, "y": 0 }
+    },
+    "BirdSprite-12.png": {
+      "frame": { "x": 192, "y": 0, "w": 16, "h": 16 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 16 },
+      "sourceSize": { "w": 16, "h": 16 },
+      "anchor": { "x": 0, "y": 0 }
+    },
+    "BirdSprite-13.png": {
+      "frame": { "x": 208, "y": 0, "w": 16, "h": 16 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 16 },
+      "sourceSize": { "w": 16, "h": 16 },
+      "anchor": { "x": 0, "y": 0 }
+    }
+  },
+  "animations": {
+    "bird": [
+      "BirdSprite-0.png",
+      "BirdSprite-1.png",
+      "BirdSprite-2.png",
+      "BirdSprite-3.png",
+      "BirdSprite-4.png",
+      "BirdSprite-5.png",
+      "BirdSprite-6.png",
+      "BirdSprite-7.png",
+      "BirdSprite-8.png",
+      "BirdSprite-9.png",
+      "BirdSprite-10.png",
+      "BirdSprite-11.png",
+      "BirdSprite-12.png",
+      "BirdSprite-13.png"
+    ]
+  },
+  "meta": {
+    "app": "https://www.codeandweb.com/texturepacker",
+    "version": "1.0",
+    "image": "bird_flying.png",
+    "format": "RGBA8888",
+    "size": { "w": 224, "h": 16 },
+    "scale": "1",
+    "smartupdate": "$TexturePacker:SmartUpdate:f2f4ca6de327b39eada4d4ee73405232:4262e337067e9d7ea64c72854b9c5bf1:f81a8102940116830ea8d1fd310ae084$"
+  }
+}

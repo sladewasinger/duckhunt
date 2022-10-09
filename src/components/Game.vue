@@ -2,10 +2,10 @@
 import { Engine } from "@/js/Engine.js";
 
 export default {
-  mounted() {
+  async mounted() {
     console.log("mounted");
     const engine = new Engine();
-    engine.init();
+    await engine.init();
   },
 };
 </script>
@@ -28,8 +28,13 @@ export default {
 }
 
 #gameCanvas {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
   width: 800px;
   height: 600px;
   border: 1px solid #000;
+  user-select: none;
 }
 </style>

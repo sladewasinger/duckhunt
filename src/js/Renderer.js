@@ -1,6 +1,7 @@
 import * as PIXI from "pixi.js";
 import { Mouse } from "./Mouse";
 import { Camera } from "./Camera";
+import spritesheet_bird_json from "@/spritesheets/bird/bird_flying.json" assert { type: "json" };
 
 export class Renderer {
   constructor(canvas, matterEngine, width, height) {
@@ -14,7 +15,7 @@ export class Renderer {
       width: width,
       height: height,
       backgroundColor: 0xffffff,
-      antialias: true,
+      antialias: false,
       resolution: 1,
     });
     this.camera = new Camera(width, height);
@@ -30,6 +31,20 @@ export class Renderer {
     text.y = 10;
     this.camera.container.addChild(text);
     this.text = text;
+  }
+
+  async loadSpriteSheets() {
+    this.bird_spritesheet = new PIXI.Spritesheet(
+      PIXI.BaseTexture.from(spritesheet_bird_json.meta.image, {
+        scaleMode: PIXI.SCALE_MODES.NEAREST,
+      }),
+      spritesheet_bird_json
+    );
+    await this.bird_spritesheet.parse();
+  }
+
+  async init() {
+    await this.loadSpriteSheets();
   }
 
   update() {
@@ -71,6 +86,15 @@ export class Renderer {
             graphics.rotation = body.angle;
             graphics.pivot = { x: 0, y: 0 };
             break;
+          case "bird":
+            graphics = this.createBirdRenderable(
+              body.x,
+              body.y,
+              body.width,
+              body.height
+            );
+            graphics.id = body.id;
+            break;
         }
 
         graphics.fromMatterJs = true;
@@ -91,5 +115,34 @@ export class Renderer {
     }
 
     this.app.renderer.render(this.app.stage);
+  }
+
+  createBirdRenderable(x, y, width, height) {
+    const container = new PIXI.Container();
+    container.width = width;
+    container.height = height;
+    container.position = { x: x, y: y };
+
+    const anim = new PIXI.AnimatedSprite(
+      this.bird_spritesheet.animations["bird"]
+    );
+    anim.position = { x: 0, y: 0 };
+    anim.pivot = { x: 8, y: 8 };
+    anim.scale = { x: 4, y: 4 };
+    anim.antialias = false;
+    anim.animationSpeed = 0.2;
+    anim.play();
+    container.addChild(anim);
+
+    const box = new PIXI.Graphics();
+    box.beginFill(0x000000);
+    box.drawRect(0, 0, width, height);
+    box.endFill();
+    box.position = { x: 0, y: 0 };
+    box.pivot = { x: width / 2, y: height / 2 };
+    box.alpha = 0.5;
+    container.addChild(box);
+
+    return container;
   }
 }
