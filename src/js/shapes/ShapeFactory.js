@@ -18,7 +18,7 @@ export class ShapeFactory {
 
   static createBird(x, y) {
     const width = 16 * 4;
-    const height = 16 * 4;
+    const height = 16 * 3;
     const bird = Matter.Bodies.rectangle(x, y, width, height, {
       shape: "bird",
       width: width,

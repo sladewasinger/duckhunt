@@ -34,7 +34,7 @@
         <key>dataFormat</key>
         <string>pixijs4</string>
         <key>textureFileName</key>
-        <filename>bird_flying.png</filename>
+        <filename>bird.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrQualityLevel</key>
@@ -124,7 +124,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>bird_flying.json</filename>
+                <filename>bird.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -173,20 +173,20 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-0.png</key>
-            <key type="filename">../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-1.png</key>
-            <key type="filename">../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-10.png</key>
-            <key type="filename">../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-11.png</key>
-            <key type="filename">../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-12.png</key>
-            <key type="filename">../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-13.png</key>
-            <key type="filename">../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-2.png</key>
-            <key type="filename">../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-3.png</key>
-            <key type="filename">../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-4.png</key>
-            <key type="filename">../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-5.png</key>
-            <key type="filename">../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-6.png</key>
-            <key type="filename">../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-7.png</key>
-            <key type="filename">../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-8.png</key>
-            <key type="filename">../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-9.png</key>
+            <key type="filename">sprites/dead-0.png</key>
+            <key type="filename">sprites/eat-0.png</key>
+            <key type="filename">sprites/eat-1.png</key>
+            <key type="filename">sprites/eat-2.png</key>
+            <key type="filename">sprites/fly-0.png</key>
+            <key type="filename">sprites/fly-1.png</key>
+            <key type="filename">sprites/fly-2.png</key>
+            <key type="filename">sprites/fly-3.png</key>
+            <key type="filename">sprites/fly-4.png</key>
+            <key type="filename">sprites/fly-5.png</key>
+            <key type="filename">sprites/fly-6.png</key>
+            <key type="filename">sprites/fly-7.png</key>
+            <key type="filename">sprites/idle-0.png</key>
+            <key type="filename">sprites/idle-1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -204,20 +204,20 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-0.png</filename>
-            <filename>../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-1.png</filename>
-            <filename>../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-10.png</filename>
-            <filename>../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-11.png</filename>
-            <filename>../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-12.png</filename>
-            <filename>../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-13.png</filename>
-            <filename>../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-2.png</filename>
-            <filename>../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-3.png</filename>
-            <filename>../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-4.png</filename>
-            <filename>../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-5.png</filename>
-            <filename>../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-6.png</filename>
-            <filename>../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-7.png</filename>
-            <filename>../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-8.png</filename>
-            <filename>../../../../../Users/Austin/Downloads/Pixel Art Bird 16x16/BirdSprite/BirdSprite-9.png</filename>
+            <filename>sprites/dead-0.png</filename>
+            <filename>sprites/eat-0.png</filename>
+            <filename>sprites/eat-1.png</filename>
+            <filename>sprites/eat-2.png</filename>
+            <filename>sprites/fly-0.png</filename>
+            <filename>sprites/fly-1.png</filename>
+            <filename>sprites/fly-2.png</filename>
+            <filename>sprites/fly-3.png</filename>
+            <filename>sprites/fly-4.png</filename>
+            <filename>sprites/fly-5.png</filename>
+            <filename>sprites/fly-6.png</filename>
+            <filename>sprites/fly-7.png</filename>
+            <filename>sprites/idle-0.png</filename>
+            <filename>sprites/idle-1.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

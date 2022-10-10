@@ -36,6 +36,18 @@ export class Engine {
       this.birds.push(bird);
     }
 
+    setInterval(() => {
+      let x = Math.random() * this.renderer.width * 0.8 + this.renderer.width;
+      let y = Math.random() * this.renderer.height * 0.8;
+      const bird = ShapeFactory.createBird(x, y);
+      bird.targetPos = {
+        x: this.renderer.width / 2 + Math.random() * 100 - 50,
+        y: Math.random() * 300,
+      };
+      Matter.World.add(this.engine.world, [bird]);
+      this.birds.push(bird);
+    }, 1000);
+
     this.lastUpdatedTime = Date.now();
     this.update();
   }
@@ -86,6 +98,10 @@ export class Engine {
           x: Math.random() * this.renderer.width * 0.8,
           y: Math.random() * this.renderer.height * 0.8,
         };
+        setTimeout(() => {
+          this.birds = this.birds.filter((x) => x !== bird);
+          Matter.World.remove(this.engine.world, [bird]);
+        }, 3000);
       }
     }
 

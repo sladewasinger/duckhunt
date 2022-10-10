@@ -1,7 +1,7 @@
 import * as PIXI from "pixi.js";
 import { Mouse } from "./Mouse";
 import { Camera } from "./Camera";
-import spritesheet_bird_json from "@/spritesheets/bird/bird_flying.json" assert { type: "json" };
+import spritesheet_bird_json from "@/spritesheets/bird/bird.json" assert { type: "json" };
 
 export class Renderer {
   constructor(canvas, matterEngine, width, height) {
@@ -91,7 +91,8 @@ export class Renderer {
               body.x,
               body.y,
               body.width,
-              body.height
+              body.height,
+              "fly"
             );
             graphics.id = body.id;
             break;
@@ -101,6 +102,21 @@ export class Renderer {
         this.camera.container.addChild(graphics);
         bodyMap[body.id] = true;
       } else {
+        if (body.shape == "bird") {
+          if (!body.alive) {
+            graphics.destroy();
+            graphics = this.createBirdRenderable(
+              body.x,
+              body.y,
+              body.width,
+              body.height,
+              "dead"
+            );
+            graphics.id = body.id;
+            graphics.fromMatterJs = true;
+            this.camera.container.addChild(graphics);
+          }
+        }
         graphics.x = body.position.x;
         graphics.y = body.position.y;
         graphics.rotation = body.angle;
@@ -117,22 +133,11 @@ export class Renderer {
     this.app.renderer.render(this.app.stage);
   }
 
-  createBirdRenderable(x, y, width, height) {
+  createBirdRenderable(x, y, width, height, animation) {
     const container = new PIXI.Container();
     container.width = width;
     container.height = height;
     container.position = { x: x, y: y };
-
-    const anim = new PIXI.AnimatedSprite(
-      this.bird_spritesheet.animations["bird"]
-    );
-    anim.position = { x: 0, y: 0 };
-    anim.pivot = { x: 8, y: 8 };
-    anim.scale = { x: 4, y: 4 };
-    anim.antialias = false;
-    anim.animationSpeed = 0.2;
-    anim.play();
-    container.addChild(anim);
 
     const box = new PIXI.Graphics();
     box.beginFill(0x000000);
@@ -140,8 +145,20 @@ export class Renderer {
     box.endFill();
     box.position = { x: 0, y: 0 };
     box.pivot = { x: width / 2, y: height / 2 };
-    box.alpha = 0.5;
+    box.alpha = 0.2;
     container.addChild(box);
+
+    const anim = new PIXI.AnimatedSprite(
+      this.bird_spritesheet.animations[animation]
+    );
+    anim.position = { x: 0, y: 0 };
+    anim.pivot = { x: 8, y: 8 };
+    anim.scale = { x: 4, y: 4 };
+    anim.antialias = false;
+    anim.animationSpeed = 0.2;
+    anim.loop = true;
+    anim.play();
+    container.addChild(anim);
 
     return container;
   }
