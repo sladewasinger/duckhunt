@@ -24,24 +24,13 @@ export class Engine {
 
     this.createGround();
     this.birds = [];
-    for (let i = 0; i < 10; i++) {
-      let x = Math.random() * this.renderer.width * 0.8 + this.renderer.width;
-      let y = Math.random() * this.renderer.height * 0.8;
-      const bird = ShapeFactory.createBird(x, y);
-      bird.targetPos = {
-        x: this.renderer.width / 2 + Math.random() * 100 - 50,
-        y: Math.random() * 300,
-      };
-      Matter.World.add(this.engine.world, [bird]);
-      this.birds.push(bird);
-    }
 
     setInterval(() => {
       let x = Math.random() * this.renderer.width * 0.8 + this.renderer.width;
       let y = Math.random() * this.renderer.height * 0.8;
       const bird = ShapeFactory.createBird(x, y);
       bird.targetPos = {
-        x: this.renderer.width / 2 + Math.random() * 100 - 50,
+        x: Math.random() * 100 - 50,
         y: Math.random() * 300,
       };
       Matter.World.add(this.engine.world, [bird]);
