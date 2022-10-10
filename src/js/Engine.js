@@ -17,11 +17,42 @@ export class Engine {
       );
       Matter.World.add(this.engine.world, [circle]);
     });
-
-    Matter.Engine.run(this.engine);
   }
 
-  init() {
+  async init() {
+    await this.renderer.init();
+
+    this.createGround();
+    this.birds = [];
+    for (let i = 0; i < 10; i++) {
+      let x = Math.random() * this.renderer.width * 0.8 + this.renderer.width;
+      let y = Math.random() * this.renderer.height * 0.8;
+      const bird = ShapeFactory.createBird(x, y);
+      bird.targetPos = {
+        x: this.renderer.width / 2 + Math.random() * 100 - 50,
+        y: Math.random() * 300,
+      };
+      Matter.World.add(this.engine.world, [bird]);
+      this.birds.push(bird);
+    }
+
+    setInterval(() => {
+      let x = Math.random() * this.renderer.width * 0.8 + this.renderer.width;
+      let y = Math.random() * this.renderer.height * 0.8;
+      const bird = ShapeFactory.createBird(x, y);
+      bird.targetPos = {
+        x: this.renderer.width / 2 + Math.random() * 100 - 50,
+        y: Math.random() * 300,
+      };
+      Matter.World.add(this.engine.world, [bird]);
+      this.birds.push(bird);
+    }, 1000);
+
+    this.lastUpdatedTime = Date.now();
+    this.update();
+  }
+
+  createGround() {
     this.ground = ShapeFactory.createRectangle(
       this.renderer.width / 2,
       this.renderer.height - 25,
@@ -35,20 +66,50 @@ export class Engine {
     );
 
     Matter.World.add(this.engine.world, [this.ground]);
-
-    this.update();
   }
 
   update() {
+    // Cleanup bodies that fall to their death:
     for (let body of this.engine.world.bodies) {
-      if (body.position.y > this.renderer.height) {
+      if (body.position.y > this.renderer.height * 4) {
         Matter.World.remove(this.engine.world, [body]);
       }
     }
 
-    Matter.Engine.update(this.engine);
+    // move bird to targetPos
+    for (let bird of this.birds.filter((x) => x.alive)) {
+      const targetPos = {
+        x: bird.targetPos.x,
+        y: bird.targetPos.y,
+      };
+      const distance = Matter.Vector.magnitude(
+        Matter.Vector.sub(targetPos, bird.position)
+      );
+      const force = Matter.Vector.mult(
+        Matter.Vector.normalise(Matter.Vector.sub(targetPos, bird.position)),
+        3
+      );
+      Matter.Body.setVelocity(bird, force);
+
+      if (distance < 100) {
+        bird.alive = false;
+        bird.isSensor = false;
+        bird.targetPos = {
+          x: Math.random() * this.renderer.width * 0.8,
+          y: Math.random() * this.renderer.height * 0.8,
+        };
+        setTimeout(() => {
+          this.birds = this.birds.filter((x) => x !== bird);
+          Matter.World.remove(this.engine.world, [bird]);
+        }, 3000);
+      }
+    }
+
+    const elapsed = Date.now() - this.lastUpdatedTime;
+    this.lastUpdatedTime = Date.now();
+    Matter.Engine.update(this.engine, elapsed);
     this.renderer.update();
 
-    setTimeout(() => this.update(), 1000 / 60);
+    window.requestAnimationFrame(() => this.update());
   }
 }

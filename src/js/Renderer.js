@@ -1,5 +1,7 @@
 import * as PIXI from "pixi.js";
 import { Mouse } from "./Mouse";
+import { Camera } from "./Camera";
+import spritesheet_bird_json from "@/spritesheets/bird/bird.json" assert { type: "json" };
 
 export class Renderer {
   constructor(canvas, matterEngine, width, height) {
@@ -13,9 +15,11 @@ export class Renderer {
       width: width,
       height: height,
       backgroundColor: 0xffffff,
-      antialias: true,
+      antialias: false,
       resolution: 1,
     });
+    this.camera = new Camera(width, height);
+    this.app.stage.addChild(this.camera.container);
 
     const text = new PIXI.Text(`Mouse: ${this.mouse.x}, ${this.mouse.y}`, {
       fontFamily: "Arial",
@@ -25,8 +29,22 @@ export class Renderer {
     });
     text.x = 10;
     text.y = 10;
-    this.app.stage.addChild(text);
+    this.camera.container.addChild(text);
     this.text = text;
+  }
+
+  async loadSpriteSheets() {
+    this.bird_spritesheet = new PIXI.Spritesheet(
+      PIXI.BaseTexture.from(spritesheet_bird_json.meta.image, {
+        scaleMode: PIXI.SCALE_MODES.NEAREST,
+      }),
+      spritesheet_bird_json
+    );
+    await this.bird_spritesheet.parse();
+  }
+
+  async init() {
+    await this.loadSpriteSheets();
   }
 
   update() {
@@ -40,7 +58,9 @@ export class Renderer {
 
     const bodyMap = {};
     for (let body of this.matterEngine.world.bodies) {
-      let graphics = this.app.stage.children.find((x) => x.id == body.id);
+      let graphics = this.camera.container.children.find(
+        (x) => x.id == body.id
+      );
       if (!graphics) {
         if (!body.shape) break;
         graphics = new PIXI.Graphics();
@@ -66,12 +86,37 @@ export class Renderer {
             graphics.rotation = body.angle;
             graphics.pivot = { x: 0, y: 0 };
             break;
+          case "bird":
+            graphics = this.createBirdRenderable(
+              body.x,
+              body.y,
+              body.width,
+              body.height,
+              "fly"
+            );
+            graphics.id = body.id;
+            break;
         }
 
         graphics.fromMatterJs = true;
-        this.app.stage.addChild(graphics);
+        this.camera.container.addChild(graphics);
         bodyMap[body.id] = true;
       } else {
+        if (body.shape == "bird") {
+          if (!body.alive) {
+            graphics.destroy();
+            graphics = this.createBirdRenderable(
+              body.x,
+              body.y,
+              body.width,
+              body.height,
+              "dead"
+            );
+            graphics.id = body.id;
+            graphics.fromMatterJs = true;
+            this.camera.container.addChild(graphics);
+          }
+        }
         graphics.x = body.position.x;
         graphics.y = body.position.y;
         graphics.rotation = body.angle;
@@ -79,12 +124,42 @@ export class Renderer {
       }
     }
 
-    for (let child of this.app.stage.children) {
+    for (let child of this.camera.container.children) {
       if (child.fromMatterJs && !bodyMap[child.id]) {
-        this.app.stage.removeChild(child);
+        this.camera.container.removeChild(child);
       }
     }
 
     this.app.renderer.render(this.app.stage);
+  }
+
+  createBirdRenderable(x, y, width, height, animation) {
+    const container = new PIXI.Container();
+    container.width = width;
+    container.height = height;
+    container.position = { x: x, y: y };
+
+    const box = new PIXI.Graphics();
+    box.beginFill(0x000000);
+    box.drawRect(0, 0, width, height);
+    box.endFill();
+    box.position = { x: 0, y: 0 };
+    box.pivot = { x: width / 2, y: height / 2 };
+    box.alpha = 0.2;
+    container.addChild(box);
+
+    const anim = new PIXI.AnimatedSprite(
+      this.bird_spritesheet.animations[animation]
+    );
+    anim.position = { x: 0, y: 0 };
+    anim.pivot = { x: 8, y: 8 };
+    anim.scale = { x: 4, y: 4 };
+    anim.antialias = false;
+    anim.animationSpeed = 0.2;
+    anim.loop = true;
+    anim.play();
+    container.addChild(anim);
+
+    return container;
   }
 }
