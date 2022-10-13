@@ -54,7 +54,8 @@ export class Renderer {
     );
 
     const numBodies = this.matterEngine.world.bodies.length;
-    this.text.text = `Mouse: ${this.mouse.x}, ${this.mouse.y} - Bodies: ${numBodies}`;
+    const numRednererBodies = this.camera.container.children.length;
+    this.text.text = `Mouse: ${this.mouse.x}, ${this.mouse.y} - Bodies: ${numBodies} | ${numRednererBodies}`;
 
     const bodyMap = {};
     for (let body of this.matterEngine.world.bodies) {
@@ -63,10 +64,11 @@ export class Renderer {
       );
       if (!graphics) {
         if (!body.shape) break;
-        graphics = new PIXI.Graphics();
+        let graphics = undefined;
 
         switch (body.shape) {
           case "rectangle":
+            graphics = new PIXI.Graphics();
             graphics.id = body.id;
             graphics.color = body.color;
             graphics.beginFill(body.color);
@@ -77,6 +79,7 @@ export class Renderer {
             graphics.pivot = { x: body.width / 2, y: body.height / 2 };
             break;
           case "circle":
+            graphics = new PIXI.Graphics();
             graphics.id = body.id;
             graphics.color = body.color;
             graphics.beginFill(body.color);
@@ -122,8 +125,9 @@ export class Renderer {
   }
 
   handleBirdRender(body, graphics) {
-    if (!body.alive) {
+    if (!body.alive && graphics.animation != "dead") {
       graphics.destroy();
+      this.camera.container.removeChild(graphics);
       graphics = this.createBirdRenderable(
         body.x,
         body.y,
@@ -143,6 +147,7 @@ export class Renderer {
     container.width = width;
     container.height = height;
     container.position = { x: x, y: y };
+    container.animation = animation;
 
     // const box = new PIXI.Graphics();
     // box.beginFill(0x000000);

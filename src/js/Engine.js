@@ -35,7 +35,7 @@ export class Engine {
       };
       Matter.World.add(this.engine.world, [bird]);
       this.birds.push(bird);
-    }, 1000);
+    }, 100);
 
     this.lastUpdatedTime = Date.now();
     this.update();
@@ -82,11 +82,7 @@ export class Engine {
 
       if (distance < 100) {
         bird.alive = false;
-        bird.isSensor = false;
-        bird.targetPos = {
-          x: Math.random() * this.renderer.width * 0.8,
-          y: Math.random() * this.renderer.height * 0.8,
-        };
+
         setTimeout(() => {
           this.birds = this.birds.filter((x) => x !== bird);
           Matter.World.remove(this.engine.world, [bird]);
