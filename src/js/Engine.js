@@ -5,17 +5,24 @@ import { ShapeFactory } from "./shapes/ShapeFactory";
 
 export class Engine {
   constructor() {
+    this.paused = false;
     this.canvas = document.getElementById("gameCanvas");
     this.engine = Matter.Engine.create();
     this.renderer = new Renderer(this.canvas, this.engine, 800, 600);
 
+    window.addEventListener("blur", () => {
+      this.paused = true;
+    });
+    window.addEventListener("focus", () => {
+      this.paused = false;
+    });
     this.canvas.addEventListener("click", (e) => {
-      const circle = ShapeFactory.createCircle(
-        this.renderer.mouse.x,
-        this.renderer.mouse.y,
-        20
-      );
-      Matter.World.add(this.engine.world, [circle]);
+      // const circle = ShapeFactory.createCircle(
+      //   this.renderer.mouse.x,
+      //   this.renderer.mouse.y,
+      //   20
+      // );
+      // Matter.World.add(this.engine.world, [circle]);
     });
   }
 
@@ -25,17 +32,22 @@ export class Engine {
     this.createGround();
     this.birds = [];
 
-    setInterval(() => {
-      let x = Math.random() * this.renderer.width * 0.8 + this.renderer.width;
+    for (let i = 0; i < 20; i++) {
+      let x = -Math.random() * this.renderer.width;
+      let targetPosX = Math.random() * 100 - 50 + this.renderer.width;
+      if (Math.random() < 0.5) {
+        x = Math.random() * this.renderer.width * 0.8 + this.renderer.width;
+        targetPosX -= this.renderer.width;
+      }
       let y = Math.random() * this.renderer.height * 0.8;
       const bird = ShapeFactory.createBird(x, y);
       bird.targetPos = {
-        x: Math.random() * 100 - 50,
+        x: targetPosX,
         y: Math.random() * 300,
       };
       Matter.World.add(this.engine.world, [bird]);
       this.birds.push(bird);
-    }, 100);
+    }
 
     this.lastUpdatedTime = Date.now();
     this.update();
@@ -58,6 +70,12 @@ export class Engine {
   }
 
   update() {
+    if (this.paused) {
+      this.lastUpdatedTime = Date.now();
+      requestAnimationFrame(() => this.update());
+      return;
+    }
+
     // Cleanup bodies that fall to their death:
     for (let body of this.engine.world.bodies) {
       if (body.position.y > this.renderer.height * 4) {
@@ -81,12 +99,10 @@ export class Engine {
       Matter.Body.setVelocity(bird, force);
 
       if (distance < 100) {
-        bird.alive = false;
-
-        setTimeout(() => {
-          this.birds = this.birds.filter((x) => x !== bird);
-          Matter.World.remove(this.engine.world, [bird]);
-        }, 3000);
+        bird.targetPos = {
+          x: Math.random() * this.renderer.width,
+          y: Math.random() * this.renderer.height * 0.65,
+        };
       }
     }
 

@@ -125,6 +125,12 @@ export class Renderer {
   }
 
   handleBirdRender(body, graphics) {
+    if (body.velocity.x > 0) {
+      graphics.scale.x = -1;
+    } else {
+      graphics.scale.x = 1;
+    }
+
     if (!body.alive && graphics.animation != "dead") {
       graphics.destroy();
       this.camera.container.removeChild(graphics);
