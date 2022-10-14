@@ -1,5 +1,6 @@
 import Matter from "matter-js";
 import { Rectangle } from "pixi.js";
+import { Vector } from "./math/Vector";
 import { Renderer } from "./Renderer.js";
 import { ShapeFactory } from "./shapes/ShapeFactory";
 
@@ -9,6 +10,7 @@ export class Engine {
     this.canvas = document.getElementById("gameCanvas");
     this.engine = Matter.Engine.create();
     this.renderer = new Renderer(this.canvas, this.engine, 800, 600);
+    this.player = undefined;
 
     window.addEventListener("blur", () => {
       this.paused = true;
@@ -23,34 +25,90 @@ export class Engine {
       //   20
       // );
       // Matter.World.add(this.engine.world, [circle]);
+
+      // see if line intersects with any birds
+      const end = Vector.subtract(
+        Vector.fromObject(this.renderer.mouse),
+        Vector.fromObject(this.player.position)
+      )
+        .normalize()
+        .scale(1000)
+        .add(this.player.position);
+      const line = {
+        start: this.player.position,
+        end,
+      };
+      const collisions = Matter.Query.ray(
+        this.birds.filter((x) => x.alive),
+        line.start,
+        line.end,
+        15
+      );
+      let deadBirds = [];
+      for (let collision of collisions) {
+        if (collision.bodyA.shape == "bird") {
+          deadBirds.push(collision.bodyA);
+        } else if (collision.bodyB.shape == "bird") {
+          deadBirds.push(collision.bodyB);
+        }
+      }
+      for (let bird of deadBirds) {
+        // spawn blood
+        //this.renderer.createBlood(bird.position.x, bird.position.y, 10);
+        const blood = ShapeFactory.createBlood(
+          this.player.position,
+          bird.position.x,
+          bird.position.y,
+          20
+        );
+        Matter.World.add(this.engine.world, blood);
+        setTimeout(() => {
+          Matter.World.remove(this.engine.world, blood);
+        }, 5000);
+        this.killBird(bird);
+      }
     });
   }
 
   async init() {
-    await this.renderer.init();
-
     this.createGround();
+    this.player = {
+      position: new Vector(this.renderer.width / 2, this.renderer.height - 50),
+      width: 92,
+      height: 21,
+    };
     this.birds = [];
 
-    for (let i = 0; i < 20; i++) {
-      let x = -Math.random() * this.renderer.width;
-      let targetPosX = Math.random() * 100 - 50 + this.renderer.width;
-      if (Math.random() < 0.5) {
-        x = Math.random() * this.renderer.width * 0.8 + this.renderer.width;
-        targetPosX -= this.renderer.width;
+    setInterval(() => {
+      if (this.paused) return;
+      if (Math.random() > 0.5) {
+        this.createBird();
       }
-      let y = Math.random() * this.renderer.height * 0.8;
-      const bird = ShapeFactory.createBird(x, y);
-      bird.targetPos = {
-        x: targetPosX,
-        y: Math.random() * 300,
-      };
-      Matter.World.add(this.engine.world, [bird]);
-      this.birds.push(bird);
-    }
+    }, 250);
+
+    await this.renderer.init(this.player);
 
     this.lastUpdatedTime = Date.now();
     this.update();
+  }
+
+  createBird() {
+    if (this.birds.filter((x) => x.alive).length >= 20) return;
+
+    let x = -Math.random() * this.renderer.width;
+    let targetPosX = Math.random() * 100 - 50 + this.renderer.width;
+    if (Math.random() < 0.5) {
+      x = Math.random() * this.renderer.width * 0.8 + this.renderer.width;
+      targetPosX -= this.renderer.width;
+    }
+    let y = Math.random() * this.renderer.height * 0.8;
+    const bird = ShapeFactory.createBird(x, y);
+    bird.targetPos = {
+      x: targetPosX,
+      y: Math.random() * 300,
+    };
+    Matter.World.add(this.engine.world, [bird]);
+    this.birds.push(bird);
   }
 
   createGround() {
@@ -112,5 +170,12 @@ export class Engine {
     this.renderer.update();
 
     window.requestAnimationFrame(() => this.update());
+  }
+
+  killBird(bird) {
+    bird.alive = false;
+    setTimeout(() => {
+      Matter.World.remove(this.engine.world, [bird]);
+    }, 3000);
   }
 }
