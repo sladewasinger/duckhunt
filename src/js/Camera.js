@@ -7,6 +7,7 @@ export class Camera {
     this.width = width;
     this.height = height;
     this.container = new PIXI.Container();
+    this.container.sortableChildren = true;
     this.container.width = width;
     this.container.height = height;
     this.container.position = { x: 0, y: 0 };

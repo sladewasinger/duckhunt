@@ -1,0 +1,144 @@
+{
+  "frames": {
+    "reload-0.png": {
+      "frame": { "x": 1, "y": 1, "w": 96, "h": 21 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 3, "y": 11, "w": 96, "h": 21 },
+      "sourceSize": { "w": 128, "h": 32 },
+      "anchor": { "x": 0.5, "y": 0.5 }
+    },
+    "reload-1.png": {
+      "frame": { "x": 99, "y": 1, "w": 96, "h": 21 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 3, "y": 11, "w": 96, "h": 21 },
+      "sourceSize": { "w": 128, "h": 32 },
+      "anchor": { "x": 0.5, "y": 0.5 }
+    },
+    "reload-2.png": {
+      "frame": { "x": 1, "y": 70, "w": 96, "h": 21 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 3, "y": 11, "w": 96, "h": 21 },
+      "sourceSize": { "w": 128, "h": 32 },
+      "anchor": { "x": 0.5, "y": 0.5 }
+    },
+    "reload-3.png": {
+      "frame": { "x": 1, "y": 47, "w": 96, "h": 21 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 3, "y": 11, "w": 96, "h": 21 },
+      "sourceSize": { "w": 128, "h": 32 },
+      "anchor": { "x": 0.5, "y": 0.5 }
+    },
+    "reload-4.png": {
+      "frame": { "x": 1, "y": 93, "w": 96, "h": 21 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 11, "w": 96, "h": 21 },
+      "sourceSize": { "w": 128, "h": 32 },
+      "anchor": { "x": 0.5, "y": 0.5 }
+    },
+    "reload-5.png": {
+      "frame": { "x": 1, "y": 24, "w": 96, "h": 21 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 11, "w": 96, "h": 21 },
+      "sourceSize": { "w": 128, "h": 32 },
+      "anchor": { "x": 0.5, "y": 0.5 }
+    },
+    "reload-6.png": {
+      "frame": { "x": 1, "y": 24, "w": 96, "h": 21 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 11, "w": 96, "h": 21 },
+      "sourceSize": { "w": 128, "h": 32 },
+      "anchor": { "x": 0.5, "y": 0.5 }
+    },
+    "reload-7.png": {
+      "frame": { "x": 1, "y": 24, "w": 96, "h": 21 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 11, "w": 96, "h": 21 },
+      "sourceSize": { "w": 128, "h": 32 },
+      "anchor": { "x": 0.5, "y": 0.5 }
+    },
+    "reload-8.png": {
+      "frame": { "x": 1, "y": 24, "w": 96, "h": 21 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 11, "w": 96, "h": 21 },
+      "sourceSize": { "w": 128, "h": 32 },
+      "anchor": { "x": 0.5, "y": 0.5 }
+    },
+    "reload-9.png": {
+      "frame": { "x": 1, "y": 24, "w": 96, "h": 21 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 11, "w": 96, "h": 21 },
+      "sourceSize": { "w": 128, "h": 32 },
+      "anchor": { "x": 0.5, "y": 0.5 }
+    },
+    "reload-10.png": {
+      "frame": { "x": 1, "y": 24, "w": 96, "h": 21 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 11, "w": 96, "h": 21 },
+      "sourceSize": { "w": 128, "h": 32 },
+      "anchor": { "x": 0.5, "y": 0.5 }
+    },
+    "reload-11.png": {
+      "frame": { "x": 1, "y": 47, "w": 96, "h": 21 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 11, "w": 96, "h": 21 },
+      "sourceSize": { "w": 128, "h": 32 },
+      "anchor": { "x": 0.5, "y": 0.5 }
+    },
+    "reload-12.png": {
+      "frame": { "x": 1, "y": 1, "w": 96, "h": 21 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 4, "y": 11, "w": 96, "h": 21 },
+      "sourceSize": { "w": 128, "h": 32 },
+      "anchor": { "x": 0.5, "y": 0.5 }
+    },
+    "reload-13.png": {
+      "frame": { "x": 1, "y": 1, "w": 96, "h": 21 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 3, "y": 11, "w": 96, "h": 21 },
+      "sourceSize": { "w": 128, "h": 32 },
+      "anchor": { "x": 0.5, "y": 0.5 }
+    }
+  },
+  "animations": {
+    "idle": ["reload-0.png"],
+    "reload": [
+      "reload-0.png",
+      "reload-1.png",
+      "reload-2.png",
+      "reload-3.png",
+      "reload-4.png",
+      "reload-5.png",
+      "reload-6.png",
+      "reload-7.png",
+      "reload-8.png",
+      "reload-9.png",
+      "reload-10.png",
+      "reload-11.png",
+      "reload-12.png",
+      "reload-13.png"
+    ]
+  },
+  "meta": {
+    "app": "https://www.codeandweb.com/texturepacker",
+    "version": "1.0",
+    "image": "shotgun.png",
+    "format": "RGBA8888",
+    "size": { "w": 121, "h": 115 },
+    "scale": "1",
+    "smartupdate": "$TexturePacker:SmartUpdate:d75ffeacad4516c7897e6539133e5eae:c242ccf131aebe8069aed8f90c7b4a17:a6b2e57dc8a39ff80702c75f4f5515e6$"
+  }
+}
