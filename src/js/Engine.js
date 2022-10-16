@@ -19,14 +19,12 @@ export class Engine {
       this.paused = false;
     });
     this.canvas.addEventListener("click", (e) => {
-      // const circle = ShapeFactory.createCircle(
-      //   this.renderer.mouse.x,
-      //   this.renderer.mouse.y,
-      //   20
-      // );
-      // Matter.World.add(this.engine.world, [circle]);
+      if (this.player.reloading || this.paused) return;
+      this.player.reloading = true;
+      setTimeout(() => {
+        this.player.reloading = false;
+      }, this.player.reloadTimeSeconds * 1000);
 
-      // see if line intersects with any birds
       const end = Vector.subtract(
         Vector.fromObject(this.renderer.mouse),
         Vector.fromObject(this.player.position)
@@ -76,6 +74,8 @@ export class Engine {
       position: new Vector(this.renderer.width / 2, this.renderer.height - 50),
       width: 92,
       height: 21,
+      reloading: false,
+      reloadTimeSeconds: 0.5,
     };
     this.birds = [];
 
@@ -167,8 +167,7 @@ export class Engine {
     const elapsed = Date.now() - this.lastUpdatedTime;
     this.lastUpdatedTime = Date.now();
     Matter.Engine.update(this.engine, elapsed);
-    this.renderer.update();
-
+    this.renderer.update(this.player);
     window.requestAnimationFrame(() => this.update());
   }
 
