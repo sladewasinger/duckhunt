@@ -167,13 +167,27 @@
             <key>heuristicMask</key>
             <false/>
             <key>defaultPivotPoint</key>
-            <point_f>0,0</point_f>
+            <point_f>0.34375,0.53125</point_f>
             <key>writePivotPoints</key>
             <true/>
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">sprites/reload-0.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.28125,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>32,8,64,16</rect>
+                <key>scale9Paddings</key>
+                <rect>32,8,64,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">sprites/reload-1.png</key>
             <key type="filename">sprites/reload-10.png</key>
             <key type="filename">sprites/reload-11.png</key>
@@ -189,7 +203,7 @@
             <key type="filename">sprites/reload-9.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0,0</point_f>
+                <point_f>0.5,0.5</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>

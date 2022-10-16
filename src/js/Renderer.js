@@ -159,17 +159,20 @@ export class Renderer {
       } else {
         if (child.shape == "player") {
           this.gunLine.clear();
-          this.gunLine.lineStyle(2, 0xff0000, 0.5);
-          this.gunLine.moveTo(child.position.x, child.position.y);
 
-          // draw line along mouse location
-          const mouseVector = new Vector(this.mouse.x, this.mouse.y);
-          const playerVector = new Vector(child.position.x, child.position.y);
-          let direction = Vector.subtract(mouseVector, playerVector)
-            .normalize()
-            .scale(1000);
-          const endVector = Vector.add(playerVector, direction);
-          this.gunLine.lineTo(endVector.x, endVector.y);
+          if (!player.reloading) {
+            this.gunLine.lineStyle(2, 0xff0000, 0.5);
+            this.gunLine.moveTo(child.position.x, child.position.y);
+
+            // draw line along mouse location
+            const mouseVector = new Vector(this.mouse.x, this.mouse.y);
+            const playerVector = new Vector(child.position.x, child.position.y);
+            let direction = Vector.subtract(mouseVector, playerVector)
+              .normalize()
+              .scale(1000);
+            const endVector = Vector.add(playerVector, direction);
+            this.gunLine.lineTo(endVector.x, endVector.y);
+          }
 
           // rotate player to mouse
           const dx = this.mouse.x - child.x;

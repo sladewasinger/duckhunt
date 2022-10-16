@@ -38,8 +38,8 @@ export class ShapeFactory {
     const blood = [];
     for (let i = 0; i < amount; i++) {
       const splatterDist = 30;
-      const width = 1;
-      const height = 1;
+      const width = 5;
+      const height = 5;
       const bloodParticle = Matter.Bodies.rectangle(
         x + Math.random() * splatterDist - splatterDist / 2,
         y + Math.random() * splatterDist - splatterDist / 2,
@@ -72,12 +72,12 @@ export class ShapeFactory {
       let force = Vector.fromObject(bloodParticle.position)
         .subtract(Vector.fromObject(splatterForceOrigin))
         .normalize()
-        .scale(2);
+        .scale(4);
 
       console.log(force);
       Matter.Body.setVelocity(bloodParticle, {
-        x: force.x + (Math.random() - 0.5) * 2,
-        y: force.y + (Math.random() - 0.5) * 2,
+        x: force.x + (Math.random() - 0.5) * 3,
+        y: force.y + (Math.random() - 0.5) * 3,
       });
       blood.push(bloodParticle);
     }
